@@ -1,0 +1,45 @@
+# DEPENDENCIES:
+# Python
+from typing import Optional, List
+from datetime import date
+from uuid import UUID
+# Pydantic
+from pydantic import BaseModel, Field
+# From own schemas:
+from schemas.auxiliar_models import ThougthAndQuestionCategory as CategoryQuestion
+
+class Thought(BaseModel):
+    '''
+    Thought Class
+    
+    This class contain the base structure for a thought created in the app.
+    
+    Inheritance:
+        
+        BaseModel class from pydantic
+                
+    Parameters:
+        
+        Nothing
+        
+    
+    Attributes:
+
+        thougth_id        : UUID
+        user_id           : int 
+        thougth_category  : Optional[ThougthAndQuestionCategory]
+        content           : str
+        created_at        : datetime
+        updated_at        : Optional[datetime]
+              
+    '''
+    thougth_id        : UUID = Field(...)
+    user_id           : int = Field(...)
+    thougth_category  : CategoryQuestion = Field(...)
+    content           : str = Field(...,
+                                    min_length=14,
+                                    max_length=256)
+    created_at        : date = Field(..., default=date.now())
+    updated_at        : date = Field(..., default=date.now())
+
+    

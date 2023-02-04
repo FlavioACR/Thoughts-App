@@ -20,8 +20,8 @@ class ThougthService():
         self.db = db
     
     # CRUD
-    def create_thougth(self, user: ThoughtModel):
-        new_thought = ThoughtModel(**user.dict())
+    def create_thougth(self, thought: ThoughtModel):
+        new_thought = ThoughtModel(**thought.dict())
         self.db.add(new_thought)
         self.db.commit()
         return

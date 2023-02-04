@@ -29,21 +29,21 @@ thought_router = APIRouter()
                   status_code=status.HTTP_201_CREATED,
                   summary="Create a thougth from a user in the app",
                   tags=["Thought"])
-def create_user(user: Thought):
+def create_user(thought: Thought):
     """"
-    T:
+    Create a Thought:
     
-    This path operation register a user in the app
+    This path operation create and record a "Thought" from a user in the app
     
     Parameters: 
     
          - Request body parameter
-            - user: UserCreate 
+            - thought: Thought 
     
     Returns a successfull registered message
     
-        - message: The user has successfully registered
+        - message: The thought has successfully registered
     """
     db = Session()
-    ThougthService(db).create_thougth(user)
+    ThougthService(db).create_thougth(thought)
     return JSONResponse(status_code=201, content={"message": "The thought has successfully registered"})

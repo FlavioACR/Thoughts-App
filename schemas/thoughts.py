@@ -48,11 +48,11 @@ class Thought(BaseModel):
         schema_extra = {
             "example": {
                 "thougth_id": 1,
-                "user_id": 1,
+                "user_id": 2,
                 "thought_category": "Personal",
                 "content": "This is the first thought recorder in my app",
                 "created_at": str(date.today()),
-                "updated_at": "2000-01-20"
+                "updated_at": str(date.today())
             }
         }
 

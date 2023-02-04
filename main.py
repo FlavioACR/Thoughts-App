@@ -16,6 +16,7 @@ from fastapi import status
 
 # Routers:
 from routers.users import user_router
+from routers.thoughts import thought_router
 
 app = FastAPI()
 app.title = "My Thoughts APP with FastAPI"
@@ -23,9 +24,7 @@ app.version = "0.0.1"
 
 #app.add_middleware(ErrorHandler)
 
-#app.include_router(movie_router)
-#app.include_router(user_router)
-         
+
 Base.metadata.create_all(bind=engine)
 
 @app.get(
@@ -45,4 +44,6 @@ def home_and_helloworld():
     '''
     return HTMLResponse('<h1>HELLO WORD AND WELCOME TO THE APP THOUGHTS APP</h1>')
 
+# ROUTERS:
 app.include_router(user_router)
+app.include_router(thought_router)

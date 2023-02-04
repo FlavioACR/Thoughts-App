@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 # This is the model if for the user table:
-class Thoughts(Base):
+class Thought(Base):
    __tablename__ = "thoughts"
    
    thougth_id       = Column(String, primary_key=True)

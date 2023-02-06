@@ -33,27 +33,29 @@ class Thought(BaseModel):
         updated_at        : Optional[datetime]
               
     '''
-    thougth_id        : UUID = Field(...)
+    thought_id        : int = Field(...)
     user_id           : int = Field(...)
-    thougth_category  : CategoryQuestion = Field(...)
+    # Looking how to create a code to validate the thought category.
+    thought_category  : str = Field(..., example="Personal") 
     content           : str = Field(...,
                                     min_length=14,
-                                    max_length=256)
+                                    max_length=256,
+                                    example="This is the first thought recorder in my app")
     created_at        : date = Field(...) #default=str(date.today()))
     updated_at        : date = Field(...) # Field(..., default=date.now())
     
     class Config:
         orm_mode = True
         
-        schema_extra = {
-            "example": {
-                "thougth_id": 1,
-                "user_id": 2,
-                "thought_category": "Personal",
-                "content": "This is the first thought recorder in my app",
-                "created_at": str(date.today()),
-                "updated_at": str(date.today())
-            }
-        }
+        # schema_extra = {
+        #     "example": {
+        #         #"thougth_id": 1,
+        #         "user_id": 2,
+        #         "thought_category": "Personal",
+        #         "content": "This is the first thought recorder in my app",
+        #         "created_at": str(date.today()),
+        #         "updated_at": str(date.today())
+        #     }
+        # }
 
     

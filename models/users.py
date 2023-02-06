@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 class Users(Base):
    __tablename__ = "users"
    
-   user_id    = Column(Integer, primary_key=True)
+   user_id    = Column(Integer, primary_key=True, index=True, auto_increment=True)
    username   = Column(String)
    email      = Column(String, unique=True)
    first_name = Column(String) 
@@ -18,3 +18,6 @@ class Users(Base):
    birth_date = Column(Date)
    gender     = Column(String)
    password   = Column(String)   
+   
+   thougths_relationship = relationship("Thought", back_populates="users_relationship")
+   

@@ -10,11 +10,11 @@ from sqlalchemy.orm import relationship
 class Thought(Base):
    __tablename__ = "thoughts"
    
-   thougth_id       = Column(String, primary_key=True)
+   thought_id       = Column(Integer, primary_key=True, index=True, auto_increment=True)
    # Foreing Key I think we need to create a realtionship with the other table:
    # May be like this: user_id = Column(String, ForeignKey('users_base.user_id'))
-   user_id          = Column(Integer)
-   thougth_category = Column(String)
+   user_id          = Column(Integer, ForeignKey("users.user_id"))
+   thought_category = Column(String)
    content          = Column(String)
    created_at       = Column(Date)
    updated_at       = Column(Date)

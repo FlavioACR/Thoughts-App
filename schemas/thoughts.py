@@ -8,6 +8,21 @@ from pydantic import BaseModel, Field
 # From own schemas:
 from schemas.auxiliar_models import ThougthAndQuestionCategory as CategoryQuestion
 
+class ThoughtUpdater(BaseModel):
+    content           : str = Field(...,
+                                    min_length=14,
+                                    max_length=256)
+    updated_at        : date = Field(...)
+    
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "example": {
+                "content": "Put here you content updated",
+                "update_at": str(date.today())                
+            }
+        }
+    
 class Thought(BaseModel):
     '''
     Thought Class

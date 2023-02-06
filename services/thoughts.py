@@ -22,9 +22,7 @@ class ThougthService():
     # CRUD
     def create_thougth(self, thought: ThoughtModel):
         new_thought = ThoughtModel(**thought.dict())
-        
-        new_thought.thought_category = str(new_thought.thought_category)
-                             
+                                     
         self.db.add(new_thought)
         self.db.commit()
         return

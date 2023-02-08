@@ -19,7 +19,7 @@ class ThoughtUpdater(BaseModel):
         schema_extra = {
             "example": {
                 "content": "Put here you content updated",
-                "update_at": str(date.today())                
+                "updated_at": str(date.today())                
             }
         }
     

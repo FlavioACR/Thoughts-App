@@ -19,5 +19,7 @@ class Users(Base):
    gender     = Column(String, nullable=False)
    password   = Column(String(255), nullable=False)   
    
+   # Relations
    thougths_relationship = relationship("Thought", back_populates="users_relationship")
+   questions_relationship = relationship("Questions", back_populates="users_relationship")
    

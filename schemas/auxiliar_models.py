@@ -2,6 +2,7 @@
 # Python
 from enum import Enum
 
+
 class ThougthAndQuestionCategory(Enum):
     '''
     ThougthAndQuestionCategory Class

@@ -10,24 +10,13 @@ from datetime import datetime
 class Answers(Base):
    __tablename__ = "answers"
    
-   answer_id         = Column(Integer, primary_key=True, index=True, autoincrement=True)
-   user_creator_id   = Column()
-   user_responder_id = Column()
-   response_content  = Column()
-   response_date     = Column()
-   
-   
-   
-   # THIS IS ONLLY A CRAFT TO TAKE SON CODE.}. 
-#    question_id       = Column(Integer, primary_key=True, index=True, autoincrement=True)
-#    user_id           = Column(Integer, ForeignKey("users.user_id", ondelete='CASCADE'), nullable=False) 
-#    question_category = Column(String, nullable=False)
-#    question_content  = Column(String(255), nullable=False)
-#    created_at        = Column(Date, nullable=False)
-#    question_status   = Column(String, nullable=False)
-#    date_status_update= Column(Date, nullable=False)
-   
+   answer_id               = Column(Integer, primary_key=True, index=True, autoincrement=True)
+   question_to_response_id = Column(Integer, ForeignKey("questions.question_id", ondeleted="CASCADE"), nullable=False)
+   user_responder_id       = Column(Interger, nullable=False)
+   response_content        = Column(String(255), nullable=False)
+   response_date           = Column(Date, nullable=False)
    
    # Relations
-#    users_relationship =  relationship("Users", back_populates="questions_relationship")
-   # answer_relationship = relationship("Awnsers", back_populates="questions_relationship")
+   users_relationship =  relationship("Users", back_populates="questions_relationship")
+   questions_relationship = relationship("Questions", back_populates="answers_relationship")
+   

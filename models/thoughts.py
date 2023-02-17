@@ -17,7 +17,7 @@ class Thought(Base):
    created_at       = Column(Date)
    updated_at       = Column(Date)
    
-   # This is the firs relations betweeen tables in the app, so this variable make a reference to the table
+   # This is the first relations betweeen tables in the app, so this variable make a reference to the table
    # where going to make the relations,thi is his parameters: 
    # Firts: Is the name of the class to do the relationship. Second: Is the name of the variable inside of the class related.
    users_relationship =  relationship("Users", back_populates = "thougths_relationship")

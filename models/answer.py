@@ -18,5 +18,5 @@ class Answers(Base):
    
    # Relations
    users_relationship =  relationship("Users", back_populates="questions_relationship")
-   questions_relationship = relationship("Questions", back_populates="answers_relationship")
+   #questions_relationship = relationship("Questions", back_populates="answers_relationship")
    

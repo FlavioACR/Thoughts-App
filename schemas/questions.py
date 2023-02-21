@@ -26,9 +26,9 @@ class Questions(BaseModel):
                 "user_id": 1,
                 "question_category": "Personal",
                 "question_content" : "Como podría remplazar un foco?",
-                "created_at": "2000-01-20",
+                "created_at": str(date.today()),
                 "question_status": "Responsed",
-                "date_status_update": "2000-01-20"                
+                "date_status_update": str(date.today())                
             }
         }
         

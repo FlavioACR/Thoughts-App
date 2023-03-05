@@ -24,7 +24,7 @@ question_router = APIRouter()
 @question_router.post(path='/create/question',
                       response_model= Questions,
                       status_code=status.HTTP_201_CREATED,
-                      summary="create a new Question in the app",
+                      summary="Create a new Question in the app",
                       tags=["Question"])
 def create_question(question: Questions):
     """"
@@ -104,7 +104,7 @@ def update_status_question(question_id: int, question_updated: Questions):
     """
     Update Question:
     
-    This path operation update a questions in the app
+    This path operation update a the question text or the status of the question in the app
     
     Parameters: 
     
@@ -120,8 +120,8 @@ def update_status_question(question_id: int, question_updated: Questions):
     if not question_to_update:
         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': "Questions Not Found, Sorry"})
     
-    QuestionService(db).update_thought(question_id, question_updated)
-    
+    QuestionService(db).update_question(question_id, question_updated)
+
     return JSONResponse(status_code=status.HTTP_200_OK, content={'message': "The Questions Was been Updated"})
 
     
@@ -130,7 +130,7 @@ def update_status_question(question_id: int, question_updated: Questions):
                         status_code=status.HTTP_200_OK,
                         summary="Delete status of questions in the app",
                         tags=["Question"])
-def deleter_question(question_id: int, question_updated: Questions):
+def delete_question(question_id: int, question_updated: Questions):
     """
     Delete Question:
     

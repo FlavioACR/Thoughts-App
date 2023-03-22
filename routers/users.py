@@ -76,7 +76,9 @@ def read_users():
     """
     db = Session()
     users = UserService(db).show_users()
-    return users
+    json_users = jsonable_encoder(users)
+    
+    return JSONResponse(content=json_users)
 
 
 @user_router.get(path='/users/{user_id}',

@@ -15,41 +15,37 @@ class AnswerService():
     def __init__(self, db) -> None:
         self.db = db
 
-    def create_answer(self, answer: Answers):
-        new_answer = AnswerModel(**answer.dit())
+    def post_answer(self, answer: Answers):
+        new_answer = AnswerModel(**answer.dict())
         self.db.add(new_answer)
         self.db.commit()
         return
     
-    # def create_user(self, user: UserCreate):
-    #     new_user = UserModel(**user.dict())
-    #     self.db.add(new_user)
-    #     self.db.commit()
-    #     return
-
-    # def show_users(self):
-    #     result = self.db.query(UserModel).all()
-    #     return result
+    def show_answers(self):
+        result = self.db.query(AnswerModel).all()
+        return result
     
-    # def get_user(self, user_id: int):
-    #     result = self.db.query(UserModel).filter(UserModel.user_id == user_id).first()
-    #     return result
+    def get_answer(self, answer_id: int):
+        result = self.db.query(AnswerModel).filter(AnswerModel.answer_id == answer_id).first()
+        return result
     
-    # def update_user(self, user_id: int, data_new_user: UserCreate):
-    #     user_to_update = self.db.query(UserModel).filter(UserModel.user_id == user_id).first()
+    # Return answer fo question_id:
+    def get_answer_of_question(self, question_to_response_id: int):
+        result = self.db.query(AnswerModel).filter(AnswerModel.question_to_response_id == question_to_response_id).first()
+        return result
+     
+    def update_answer(self, answer_id: int, data_answer_update: Answers):
         
-    #     user_to_update.username = data_new_user.username
-    #     user_to_update.email    = data_new_user.email
-    #     user_to_update.first_name = data_new_user.first_name 
-    #     user_to_update.last_name = data_new_user.last_name
-    #     user_to_update.birth_date = data_new_user.birth_date 
-    #     user_to_update.gender = data_new_user.gender
-    #     user_to_update.password = data_new_user.password
+        answer_to_update = self.db.query(AnswerModel).filter(AnswerModel.answer_id == answer_id).firtst()
         
-    #     self.db.commit()
-    #     return
+        answer_to_update.response_content = data_answer_update.response_content
+        answer_to_update.response_date    = data_answer_update.response_date
+        
+        self.db.commit()
+        return
          
-    # def delete_user(self, user_id: int):
-    #    self.db.query(UserModel).filter(UserModel.user_id == user_id).delete()
-    #    self.db.commit()
-    #    return
+    def delete_answer(self, answer_id: int):
+       result = self.db.query(AnswerModel).filter(AnswerModel.answer_id == answer_id).delete()
+       self.db.commit()
+       
+       return

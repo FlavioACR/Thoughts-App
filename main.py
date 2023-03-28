@@ -18,6 +18,7 @@ from fastapi import status
 from routers.users import user_router
 from routers.thoughts import thought_router
 from routers.questions import question_router
+from routers.answers import answer_router
 
 app = FastAPI()
 app.title = "My Thoughts APP with FastAPI"
@@ -49,3 +50,4 @@ def home_and_helloworld():
 app.include_router(user_router)
 app.include_router(thought_router)
 app.include_router(question_router)
+app.include_router(answer_router)

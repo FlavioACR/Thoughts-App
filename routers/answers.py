@@ -15,7 +15,7 @@ from config.database import Session
 # From models.py for SQLalchemy:
 from models.answer import Answers as AnswerModel
 # From schemas.py for Pydantic:
-from schemas.answer import Answers
+from schemas.answer import Answers, AnswerUpdater
 # Services:
 from services.answer import AnswerService
 
@@ -25,7 +25,7 @@ answer_router = APIRouter()
                       response_model= Answers,
                       status_code=status.HTTP_201_CREATED,
                       summary="Post a Answer for a Question in the app",
-                      tags=["Asnwer"])
+                      tags=["Answer"])
 def post_answer(answer: Answers):
     """"
     Post a Answer:
@@ -45,110 +45,109 @@ def post_answer(answer: Answers):
     AnswerService(db).post_answer(answer)
     return JSONResponse(status_code=201, content={"message": "The Answer has successfully posted"})
 
-# # # @question_router.get(path='/questions',
-# #                       response_model= List[Questions],
-# #                       status_code=status.HTTP_200_OK,
-# #                       summary="Show all the questions in the app",
-# #                       tags=["Question"])
-# # def show_questions():
-# #     """"
-# #     Show all Questions:
+@answer_router.get(path='/answers',
+                   response_model= List[Answers],
+                   status_code=status.HTTP_200_OK,
+                   summary="Show all the answers in the app",
+                   tags=["Answer"])
+def show_answers():
+    """"
+    Show all Answers:
     
-# #     This path operation show all the "Questions" in the app
+    This path operation show all the "Answers" in the app
     
-# #     Parameters: 
+    Parameters:     
+         - Nothing
     
-# #          - Nothing
-    
-# #     Returns:
+    Returns:
 
-# #         - List of all the questions in the app
-# #     """
-# #     db = Session()
-# #     all_questions = QuestionService(db).show_question()
-# #     return all_questions
+        - List of all the answers in the app
+    """
+    db = Session()
+    all_answer = AnswerService(db).show_answers()
+    return all_answer
 
-# # @question_router.get(path='/questions/{question_id}',
-# #                       response_model= Questions,
-# #                       status_code=status.HTTP_200_OK,
-# #                       summary="Show a specific questions in the app",
-# #                       tags=["Question"])
-# # def show_question(question_id: int = Path(...,
-# #                                     title="Question ID",
-# #                                     description="This is a questions ID",
-# #                                     example=1)):
-# #     """
-# #     Show a Question:
+@answer_router.get(path='/answers/{question_id}',
+                   response_model= List[Answers],
+                   status_code=status.HTTP_200_OK,
+                   summary="Show a specific answers by questions in the app",
+                   tags=["Answer"])
+def show_question(question_id: int = Path(...,
+                                    title="Question ID",
+                                    description="Questions ID to select Answers",
+                                    example=1)):
+    """
+    Show a Answer of a Question:
     
-# #     This path operation show a specific Questions in the app
+    This path operation show a specific answr from a Questions in the app
     
-# #     Parameters: 
+    Parameters: 
     
-# #          - question_id
+         - question_id
     
-# #     Returns:
+    Returns:
 
-# #         - The basic information from the questions found in the app
+        - The list of answers of the questions id selected and found in the app
 
-# #     """
-# #     db = Session()
-# #     question = QuestionService(db).get_question(question_id)
-# #     return question
+    """
+    db = Session()
+    answer_of_question = AnswerService(db).get_answer_of_question(question_id)
+    return answer_of_question
     
-# # @question_router.put(path='/questions/{question_id}',
-# #                       response_model= Questions,
-# #                       status_code=status.HTTP_200_OK,
-# #                       summary="Update status of questions in the app",
-# #                       tags=["Question"])
-# # def update_status_question(question_id: int, question_updated: Questions):
-# #     """
-# #     Update Question:
+@answer_router.put(path='/answer/{answer_id}/update',
+                      response_model= Answers,
+                      status_code=status.HTTP_200_OK,
+                      summary="Update content of a answer in the app",
+                      tags=["Answer"])
+def update_content_answer(answer_id: int, answer_updated: AnswerUpdater):
+    """
+    Update Answer Content:
     
-# #     This path operation update a the question text or the status of the question in the app
+    This path operation update the conntent answer of  question in the app
     
-# #     Parameters: 
+    Parameters: 
     
-# #          - question_id
-# #          - question_updated: Questions
+         - answer_id
+         - answer_updated: Answer
     
-# #     Returns:
-# #         - message: The questions has successfully updated
-# #     """
-# #     db = Session()
-# #     question_to_update = QuestionService(db).get_question(question_id)
+    Returns:
+        - message: The content's answer has successfully updated
+    """
+    db = Session()
+    answer_to_update = AnswerService(db).get_answer(answer_id)
     
-# #     if not question_to_update:
-# #         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': "Questions Not Found, Sorry"})
+    if not answer_to_update:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': "Answer Not Found, Sorry"})
     
-# #     QuestionService(db).update_question(question_id, question_updated)
+    AnswerService(db).update_answer(answer_id, answer_updated)
 
-# #     return JSONResponse(status_code=status.HTTP_200_OK, content={'message': "The Questions Was been Updated"})
+    return JSONResponse(status_code=status.HTTP_200_OK, content={'message': "The Answer Was been Updated"})
 
     
-# # @question_router.delete(path='/questions/{question_id}',
-# #                         response_model= Questions,
-# #                         status_code=status.HTTP_200_OK,
-# #                         summary="Delete status of questions in the app",
-# #                         tags=["Question"])
-# # def delete_question(question_id: int, question_updated: Questions):
-# #     """
-# #     Delete Question:
+@answer_router.delete(path='/answers/{answer_id}/delete',
+                        response_model= Answers,
+                        status_code=status.HTTP_200_OK,
+                        summary="Delete an answer of questions in the app",
+                        tags=["Answer"])
+def delete_question(answer_id: int):
+    """
+    Delete an Answe of a Question:
     
-# #     This path operation delete a questions in the app
+    This path operation delete an answer of a questions in the app
     
-# #     Parameters: 
+    Parameters: 
     
-# #          - question_id
+         - answer_id
     
-# #     Returns:
-# #         - message: The questions has successfully updated
-# #     """
-# #     db = Session()
-# #     question_to_update = QuestionService(db).get_question(question_id)
+    Returns:
+        - message: The answerr has successfully updated
+    """
+    db = Session()
+    answer_to_delete = AnswerService(db).get_answer(answer_id)
     
-# #     if not question_to_update:
-# #         return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': "Questions Not Found, Sorry"})
+    if not answer_to_delete:
+        return JSONResponse(status_code=status.HTTP_404_NOT_FOUND, content={'message': "Answer Not Found, Sorry"})
     
-# #     QuestionService(db).delete_question(question_id)
+    AnswerService(db).delete_answer(answer_id)
     
-# #     return JSONResponse(status_code=status.HTTP_200_OK, content={'message': "The Questions Was been Deleted"})
+    return JSONResponse(status_code=status.HTTP_200_OK, content={'message': "The answer Was been Deleted"})

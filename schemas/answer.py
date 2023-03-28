@@ -10,7 +10,7 @@ class Answers(BaseModel):
     answer_id               : int = Field(...)
     question_to_response_id : int = Field(...)  
     user_responder_id       : int = Field(...)
-    response_content        : str = Field(...,min_length=25,max_length=250)
+    response_content        : str = Field(...,min_length=25,max_length=256)
     response_date           : date = Field(...)
     
     class Config:
@@ -25,4 +25,21 @@ class Answers(BaseModel):
                 "response_date": str(date.today())               
             }
         }
+        
+        
+class AnswerUpdater(BaseModel):
+    response_content           : str = Field(...,
+                                    min_length=14,
+                                    max_length=256)
+    response_date              : date = Field(...)
     
+    class Config:
+        orm_mode = True
+        schema_extra = {
+            "example": {
+                "response_content": "Put here you content to updated the answer",
+                "response_date"   : str(date.today())                
+            }
+        }
+        
+ 

@@ -1,4 +1,7 @@
 # DEPENDENCIES:
+from utils.jwt_manager import create_token
+# from schemas.user import User # EL modelo User <<
+
 # Python
 from typing import Optional, List
 from datetime import date
@@ -11,8 +14,7 @@ from fastapi.responses import JSONResponse
 from fastapi import status
 from fastapi.encoders import jsonable_encoder
 # from fastapi import HTTPException
-# From apps modules:
-#   config.py:
+# From apps modules: #   config.py:
 from config.database import Session
 # From models.py for SQLalchemy:
 from models.users import Users as UserModel
@@ -20,10 +22,24 @@ from models.users import Users as UserModel
 from schemas.users import UserBase, UserCreate, User
 from services.users import UserService
 
-
 user_router = APIRouter()
 
-# CRUD:
+# # CRUD:
+# @user_router.post('/login', tags=[''])
+# def login(user: User):
+#     if user.email == "admin@gmail.com" and user.password == "admin":
+#         token: str = create_token(user.dict())
+#         return JSONResponse(status_code=200, content=token)
+
+# # Necesito como parametro dos cosas; El usuario y la contraseña del usuario para confirmar el login, para eso crearemos el siguiente router:
+# @user_router.post(path='/login',
+#                   response_model=User,
+#                   status_code=status.HTTP_202_ACCEPTED,
+#                   summary="Login a user if exists in the app",
+#                   tags=["Users"])
+# def log_user(user_log: UserLog):
+#     pass
+
 @user_router.post(path='/sign_up',
                   response_model=User,
                   status_code=status.HTTP_201_CREATED,

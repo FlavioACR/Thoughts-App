@@ -1,5 +1,4 @@
-from jwt import encode, decode
-
+import jwt
 def create_token(data: dict) -> str:
     """
     create_token:
@@ -12,7 +11,7 @@ def create_token(data: dict) -> str:
     * token: str
     
     """
-    token: str = encode(payload=data, key="my_secret_key", algorithm="HS256")
+    token: str = jwt.encode(payload=data, key="my_secret_key", algorithm="HS256")
     return token
 
 def validate_token(token: str) -> dict:
@@ -27,5 +26,5 @@ def validate_token(token: str) -> dict:
     * data: dict
     
     """
-    data: dict = decode(token, key="my_secret_key", algorithms=['HS256'])
+    data: dict = jwt.decode(token, key="my_secret_key", algorithms=['HS256'])
     return data

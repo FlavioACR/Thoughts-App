@@ -5,11 +5,11 @@ from datetime import date
 # Pydantic
 from pydantic import BaseModel, Field
 # FastAPI
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, status
 from fastapi.responses import HTMLResponse
 from config.database import engine, Base
-from fastapi import status
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 #from middlewares.error_handler import ErrorHandler
 #from routers.users import movie_router
@@ -25,8 +25,11 @@ app = FastAPI()
 app.title = "My Thoughts APP with FastAPI"
 app.version = "0.0.1"
 
-# 
-template = Jinja2Templates(directory='./view')
+# Plantillas HTML 
+template = Jinja2Templates(directory='./templates')
+
+# Declaración de la carpeta de archivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 #app.add_middleware(ErrorHandler)
 
@@ -39,7 +42,7 @@ Base.metadata.create_all(bind=engine)
     status_code=status.HTTP_200_OK,
     summary="Home's app and Hello World",
     tags=['home'])
-def index(request: Request):
+def home_page(request: Request):
     '''
     Home's app & Hello World FastAPI 
 
@@ -49,7 +52,7 @@ def index(request: Request):
     
     Returns   : A json with the greeting information
     '''
-    return template.TemplateResponse('index.html', {"request": request})
+    return template.TemplateResponse('home_page.html', {"request": request})
 
 # ROUTERS:
 app.include_router(user_router)

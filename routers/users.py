@@ -1,19 +1,17 @@
 # DEPENDENCIES:
 from utils.jwt_manager import create_token
-# from schemas.user import User # EL modelo User <<
-
 # Python
 from typing import Optional, List
 from datetime import date
 # Pydantic
 from pydantic import BaseModel, Field
 # FastAPI
-from fastapi import APIRouter
-from fastapi import Depends, Path, Query
+from fastapi import FastAPI, Request, Response, Form, APIRouter, Depends, Path, Query, status, HTTPException
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.responses import JSONResponse
-from fastapi import status
 from fastapi.encoders import jsonable_encoder
-# from fastapi import HTTPException
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 # From apps modules: #   config.py:
 from config.database import Session
 # From models.py for SQLalchemy:
@@ -22,23 +20,23 @@ from models.users import Users as UserModel
 from schemas.users import UserBase, UserCreate, User
 from services.users import UserService
 
+
 user_router = APIRouter()
 
-# # CRUD:
-# @user_router.post('/login', tags=[''])
-# def login(user: User):
-#     if user.email == "admin@gmail.com" and user.password == "admin":
-#         token: str = create_token(user.dict())
-#         return JSONResponse(status_code=200, content=token)
+# Plantillas HTML 
+template = Jinja2Templates(directory='./templates')
 
-# # Necesito como parametro dos cosas; El usuario y la contraseña del usuario para confirmar el login, para eso crearemos el siguiente router:
-# @user_router.post(path='/login',
-#                   response_model=User,
-#                   status_code=status.HTTP_202_ACCEPTED,
-#                   summary="Login a user if exists in the app",
-#                   tags=["Users"])
-# def log_user(user_log: UserLog):
-#     pass
+# # CRUD:
+
+@user_router.get(path='/login',
+                  response_class=HTMLResponse,
+                  status_code=status.HTTP_202_ACCEPTED,
+                  summary="Page to login a user in the app",
+                  tags=["Users"])
+def login_user(req: Request):
+    return template.TemplateResponse("login.html", {"request": req})
+
+
 
 @user_router.post(path='/sign_up',
                   response_model=User,
@@ -46,6 +44,7 @@ user_router = APIRouter()
                   summary="Sign Up a new user in the app",
                   tags=["users"])
 def create_user(user: UserCreate):
+    # Necesito cambiar la esctructura para devolver el formulario conectado al html.
     """"
     Create_user:
     

@@ -36,6 +36,14 @@ template = Jinja2Templates(directory='./templates')
 def login_user(req: Request):
     return template.TemplateResponse("login.html", {"request": req})
 
+@user_router.get(path='/signup',
+                  response_class=HTMLResponse,
+                  status_code=status.HTTP_202_ACCEPTED,
+                  summary="Page to login a user in the app",
+                  tags=["Users"])
+def signup_user(req: Request):
+    return template.TemplateResponse("signup.html", {"request": req})
+
 
 
 @user_router.post(path='/sign_up',

@@ -1,49 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mi Red Social</title>
+    <meta charset="UTF-8">
+    <title>Red Social - Home</title>
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Mi Red Social</h1>
-      </header>
-      <main>
-        <div class="login-section">
-          <h2>Iniciar sesión</h2>
-          <form>
-            <label for="username">Nombre de usuario:</label>
-            <input type="text" id="username" name="username"><br>
-
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password"><br>
-
-            <input type="submit" value="Iniciar sesión">
-          </form>
+    {% include 'header.html' %}
+    <main>
+      <div class="post-form">
+        <h2>Publicar</h2>
+        <form>
+          <textarea name="post-content" placeholder="Escribe tu pensamiento o pregunta aquí"></textarea>
+          <input type="submit" value="Publicar">
+        </form>
+      </div>
+      <div class="post-feed">
+        <h2>Publicaciones recientes</h2>
+        <div class="post">
+          <p>Usuario1: ¿Cuál es tu película favorita?</p>
         </div>
-        <div class="signup-section">
-          <h2>Registrarse</h2>
-          <form>
-            <label for="name">Nombre completo:</label>
-            <input type="text" id="name" name="name"><br>
-
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email"><br>
-
-            <label for="new-username">Nombre de usuario:</label>
-            <input type="text" id="new-username" name="new-username"><br>
-
-            <label for="new-password">Contraseña:</label>
-            <input type="password" id="new-password" name="new-password"><br>
-
-            <input type="submit" value="Registrarse">
-          </form>
+        <div class="post">
+          <p>Usuario2: ¡Hoy fue un día increíble!</p>
         </div>
-      </main>
-      <footer>
-        <p>© 2023 Mi Red Social. Todos los derechos reservados.</p>
-      </footer>
-    </div>
+        <div class="post">
+          <p>Usuario3: ¿Alguien sabe cómo hacer un pastel de chocolate?</p>
+        </div>
+        <!-- Agrega más publicaciones aquí -->
+      </div>
+    </main>
+
+    {% include 'footer.html'%}
   </body>
 </html>
+

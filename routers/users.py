@@ -26,7 +26,7 @@ user_router = APIRouter()
 # Plantillas HTML 
 template = Jinja2Templates(directory='./templates')
 
-# # CRUD:
+# CRUD:
 
 @user_router.get(path='/login',
                   response_class=HTMLResponse,
@@ -36,6 +36,7 @@ template = Jinja2Templates(directory='./templates')
 def login_user(req: Request):
     return template.TemplateResponse("login.html", {"request": req})
 
+## Signuo view:
 @user_router.get(path='/signup',
                   response_class=HTMLResponse,
                   status_code=status.HTTP_202_ACCEPTED,
@@ -43,6 +44,32 @@ def login_user(req: Request):
                   tags=["Users"])
 def signup_user(req: Request):
     return template.TemplateResponse("signup.html", {"request": req})
+
+
+
+'''
+@app.post("/data-processing")
+def data_processing(firstname: str = Form(), lastname: str = Form(), username: str = Form(), country: str = Form(), password_user: str = Form()):
+  data_user = {
+    "firstname": firstname,
+    "lastname": lastname,
+    "username": username,
+    "country": country,
+    "password_user": password_user
+  }
+  db = User(data_user)
+  db.create_user()@app.post("/data-processing")
+def data_processing(firstname: str = Form(), lastname: str = Form(), username: str = Form(), country: str = Form(), password_user: str = Form()):
+  data_user = {
+    "firstname": firstname,
+    "lastname": lastname,
+    "username": username,
+    "country": country,
+    "password_user": password_user
+  }
+  db = User(data_user)
+  db.create_user()
+'''
 
 
 

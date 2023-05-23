@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}{% endblock %} Thought App
+    </title>
+    <link rel="icon" type="image/png" href="static/img/tab_logo.png">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  </head>
+
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+        {% block content %}{% endblock%}
+    </main>
+
+    {% include 'footer.html'%}
+  </body>
+
+  </html>
+

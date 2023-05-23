@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title> Welcome - Home Page App</title>
+    <link rel="icon" type="image/png" href="static/img/tab_logo.png">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style>
+      .welcome-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image-container {
+        flex: 1;
+        text-align: center;
+      }
+
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .description {
+        flex: 1;
+        padding: 0 20px;
+      }
+
+      .description h2 {
+        font-size: 24px;
+      }
+
+      .description p {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>WELCOME TO MY THOUGHT APP</h1>
+      <h2>Save place to think, share, comment</h2>
+    </header>
+    <main>
+      <div class="welcome-section">
+        <div class="image-container">
+          <img src="static/img/logo.png" alt="Imagen de bienvenida">
+        </div>
+        <div class="description">
+          <h2>App Description</h2>  
+          <p> Un lugar seguro para compartir pensamientos, opiniones  y preguntas de multiples temas desde lo personal hasta lo personal.</p>
+          <h2>Mision</h2>
+          <p> Crear una comunidad segura para compartir ideas y ayudarnos mutuamente.</p>
+        </div>
+      </div>
+      <div class="redirect-links">
+        <a href="login">Log In</a>
+        <a href="signup">Sign Up</a>
+      </div>
+    </main>
+    <footer>
+      <p>© 2023 Red Social. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>

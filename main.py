@@ -12,8 +12,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 #from middlewares.error_handler import ErrorHandler
-#from routers.users import movie_router
-#from routers.users import user_router
+    #from routers.users import movie_router
+    #from routers.users import user_router
 
 # routers/:
 from routers.users import user_router

@@ -1,4 +1,6 @@
-# DEPENDENCIES:
+# DEPENDENCIES
+
+
 from utils.jwt_manager import create_token
 # Python
 from typing import Optional, List
@@ -26,7 +28,41 @@ user_router = APIRouter()
 # Plantillas HTML 
 template = Jinja2Templates(directory='./templates')
 
-# CRUD:
+##------------------- CRUD -------------------## 
+
+
+@user_router.get(path='/signup',
+                  response_class=HTMLResponse,
+                  status_code=status.HTTP_202_ACCEPTED,
+                  summary="Create a User in the App",
+                  tags=["Users"])
+def signup_user(req: Request):
+    return template.TemplateResponse("signup.html", {"request": req})
+
+@user_router.post("/creating_user")
+def creating_user(
+    username: str = Form(),
+    email: str = Form(),
+    first_name: str = Form(),
+    last_name: str = Form(),
+    birth_date: str = Form(),
+    gender: str = Form(),
+    password: str = Form()
+):
+    new_user_data = {
+        "username": username,
+        "email": email,
+        "first_name": first_name,
+        "last_name": last_name,
+        "birth_date": birth_date,
+        "gender":gender,
+        "password":password
+    }
+
+    # Crear una funcion que pueda llamar para ingresar la información del nuevo usuario.
+    # Tambien se debe de incluir el agregar automaticamente el ID.
+    
+    
 
 @user_router.get(path='/login',
                   response_class=HTMLResponse,
@@ -35,17 +71,6 @@ template = Jinja2Templates(directory='./templates')
                   tags=["Users"])
 def login_user(req: Request):
     return template.TemplateResponse("login.html", {"request": req})
-
-## Signuo view:
-@user_router.get(path='/signup',
-                  response_class=HTMLResponse,
-                  status_code=status.HTTP_202_ACCEPTED,
-                  summary="Page to login a user in the app",
-                  tags=["Users"])
-def signup_user(req: Request):
-    return template.TemplateResponse("signup.html", {"request": req})
-
-
 
 '''
 @app.post("/data-processing")

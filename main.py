@@ -29,11 +29,10 @@ app.version = "0.0.1"
 
 Base.metadata.create_all(bind=engine)
 
-@app.get(
-    path='/',
-    status_code=status.HTTP_200_OK,
-    summary="Home's app and Hello World",
-    tags=['home'])
+@app.get(path='/',
+         status_code=status.HTTP_200_OK,
+         summary="Home's app and Hello World",
+         tags=['Home'])
 def home_and_helloworld():
     '''
     Home's app & Hello World FastAPI 
@@ -42,7 +41,8 @@ def home_and_helloworld():
 
     Parameters: Nothing
     
-    Returns   : A json with the greeting information
+    Returns   : A HTML with a greeting
+    
     '''
     return HTMLResponse('<h1>HELLO WORD AND WELCOME TO THE APP THOUGHTS APP</h1>')
 
